@@ -1,53 +1,49 @@
-# Data Analytics · Level 1 · Task 3 — Cleaning Data
+# Data Analytics · Level 1 · Task 1 — EDA on Retail Sales Data
 
 **Oasis Infobyte Internship Program (OIBSIP)** · Track: Data Analytics
 
 ## Objective
-Take a deliberately messy customer-orders dataset and turn it into a clean, analysis-ready dataset, documenting every decision.
+Perform a thorough Exploratory Data Analysis on a retail sales dataset to uncover sales patterns, customer behaviour and actionable business insights.
 
 ## Files
 | File | Description |
 |---|---|
-| `Task3_Data_Cleaning.ipynb` | Full cleaning workflow with markdown justifications |
-| `messy_customer_orders.csv` | Raw (synthetic) dataset with deliberate data-quality problems |
-| `cleaned_customer_orders.csv` | Output produced by running the notebook |
-| `screenshots/` | Key outputs and charts |
+| `Task1_EDA_Retail_Sales.ipynb` | Full EDA notebook with written observations after each chart |
+| `retail_sales_data.csv` | Dataset: 3,893 transactions, Jan 2023 – Dec 2024 |
+| `screenshots/` | Exported charts |
 
 ## Tech Stack
 Python · pandas · numpy · matplotlib · seaborn · Jupyter Notebook
 
-## Problems in the raw data
-- Duplicate rows
-- Nulls in several columns
-- Inconsistent labels (`M` / `male` / `Female`, `CC` / `Credit Card`, `Bangalore` / `Bengaluru`)
-- Three different date formats stored as text
-- Currency symbols (`$1,234.50`) inside numeric columns
-- Impossible ages (negative, 250, 999)
-- Extreme order amounts
+## What the notebook covers
+- Initial inspection (shape, dtypes, nulls, duplicates)
+- Descriptive statistics (mean, median, mode, std)
+- Monthly and quarterly sales trends
+- Customer demographics (age groups, gender)
+- Top 10 products (by units and by revenue); revenue by category
+- Correlation heatmap
+- Extra insights: discount effectiveness, category mix by age group, weekday revenue
+- Conclusion with business recommendations
 
-## Approach
-1. **Data quality report** — nulls, duplicates, dtypes, range anomalies
-2. **Duplicate removal** — exact duplicates dropped (first kept)
-3. **Standardisation** — whitespace, case, and label mapping
-4. **Type correction** — ID → string, dates → datetime, money → float
-5. **Outliers** — impossible ages set to NaN; order amounts capped using the IQR method
-6. **Missing values** — median (age, amount, rating), mode (quantity), "Unknown" (gender, city), row drop (missing date); each choice justified in the notebook
-7. **Before vs. after summary** and export of the cleaned CSV
+## Key findings
+- **Strong seasonality:** Q4 brings ~36% of revenue; Dec 2024 was the peak month.
+- **Weekends:** Saturday + Sunday generate ~35% of revenue.
+- **Electronics** earns ~48% of revenue from ~13% of units; **Clothing** is the volume driver.
+- **Discounts don't lift order size:** average quantity stays ~2.0 from 0% to 30% off, while revenue per order falls ~35%.
+- **Age shapes *what* is bought**, not *how much*: Clothing for 18–25, Home & Kitchen for 56+.
 
-## Results
-| Metric | Before | After |
-|---|---|---|
-| Rows | 1,050 | 978 |
-| Null cells | 398 | 0 |
-| Duplicate rows | 50 | 0 |
-| Columns with correct dtype | 7/10 | 10/10 |
+## Recommendations
+1. Replace blanket deep discounts with targeted offers and A/B test them.
+2. Plan stock, staffing and ad spend around Q4 and weekends.
+3. Use Clothing to bring in traffic and cross-sell Electronics accessories.
+4. Target campaigns by age group.
+5. Build a loyalty programme for the top 10% of customers (~25% of revenue).
 
 ## How to run
 ```bash
 pip install pandas numpy matplotlib seaborn jupyter
-jupyter notebook Task3_Data_Cleaning.ipynb
+jupyter notebook Task1_EDA_Retail_Sales.ipynb
 ```
-Run all cells; `cleaned_customer_orders.csv` is saved next to the notebook.
 
 ## Note
-The dataset is synthetic, generated to contain realistic data-quality problems.
+The dataset is synthetic, generated for this analysis. The notebook runs unchanged on any retail dataset with the same columns.
