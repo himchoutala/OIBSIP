@@ -1,0 +1,5 @@
+﻿.ipynb_checkpoints/
+__pycache__/
+*.pyc
+
+DataAnalytics-L2-FraudDetection/creditcard.csv
